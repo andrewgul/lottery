@@ -1,4 +1,5 @@
 import GameResultModel from "../models/GameResultModel"
+import TileModel from "../models/TileModel"
 import NumberGenerator from "./NumberGenerator"
 import Comparator from "./Сomparator"
 
@@ -47,4 +48,14 @@ export default class GameManager {
             `Совпало: ${result2}`,
         ].join('\n')
     )
+
+    static generateSelectedTiles = (selected: number, amount: number): TileModel[] => {
+        const selectedArray = NumberGenerator.generateArray(selected, 1, amount)
+
+        return new Array(amount).fill(null)
+            .map((_, index) => ({
+                value: index + 1,
+                selected: selectedArray.includes(index + 1)
+            }))
+    }
 }

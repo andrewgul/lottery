@@ -11,6 +11,7 @@ import gameResultInitial from '../../data/game-result-initial'
 import GameResultModel from '../../models/GameResultModel'
 import GameManager from '../../helpers/GameManager'
 import Result from '../result/Result'
+import { ReactComponent as MagicWand } from '../../assets/magic-wand.svg'
 
 const Game: React.FC = () => {
     const [tiles19, setTiles19] = useState<TileModel[]>(tilesInitial19)
@@ -64,9 +65,18 @@ const Game: React.FC = () => {
         setGameResult(gameResultInitial)
     }
 
+    const doSomeMagic = (): void => {
+        setTiles19(GameManager.generateSelectedTiles(8, 19))
+        setTiles2(GameManager.generateSelectedTiles(1, 2))
+    }
+
     return (
         <div className={styles['wrapper']}>
             <div className={styles['container']}>
+                <MagicWand
+                    className={styles['magic-wand']}
+                    onClick={doSomeMagic}
+                />
                 <div className={styles['title']}>
                     Билет
                 </div>

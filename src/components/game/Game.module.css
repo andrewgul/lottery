@@ -12,6 +12,7 @@
     border-radius: 3px;
     padding: 24px 10px;
     min-width: 300px;
+    position: relative;
 }
 
 .title {
@@ -24,4 +25,11 @@
 .button-wrapper {
     display: grid;
     place-content: center;
+}
+
+.magic-wand {
+    position: absolute;
+    top: 24px;
+    right: 10px;
+    cursor: pointer;
 }
