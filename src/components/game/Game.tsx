@@ -6,6 +6,7 @@ import styles from './Game.module.css'
 import TileGrid from '../tile-grid/TileGrid'
 import Tile from '../tile/Tile'
 import produce from 'immer'
+import Button from '../button/Button'
 
 const Game: React.FC = () => {
     const [tiles19, setTiles19] = useState<TileModel[]>(tilesInitial19)
@@ -19,8 +20,12 @@ const Game: React.FC = () => {
         tiles2.filter((tile) => (tile.selected)).length
     ), [tiles2])
 
+    const canSubmit = useMemo(() => (
+        (tiles19selected === 8) && (tiles2selected === 1)
+    ), [tiles19selected, tiles2selected])
+
     const handleTile19Selection = (selected: boolean, index: number): void => {
-        if (tiles19selected >= 8) return
+        if (selected && tiles19selected >= 8) return
 
         setTiles19(produce(tiles19, (draft: TileModel[]) => {
             draft[index].selected = selected
@@ -28,7 +33,7 @@ const Game: React.FC = () => {
     }
 
     const handleTile2Selection = (selected: boolean, index: number): void => {
-        if (tiles2selected >= 1) return
+        if (selected && tiles2selected >= 1) return
 
         setTiles2(produce(tiles2, (draft: TileModel[]) => {
             draft[index].selected = selected
@@ -61,6 +66,9 @@ const Game: React.FC = () => {
                     >{tile.value}</Tile>
                 ))}
             </TileGrid>
+            <Button onClick={() => {console.log('submit!')}} disabled={!canSubmit}>
+                Показать результат
+            </Button>
         </div>
     )
 }
