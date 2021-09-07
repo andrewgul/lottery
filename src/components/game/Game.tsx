@@ -7,10 +7,14 @@ import TileGrid from '../tile-grid/TileGrid'
 import Tile from '../tile/Tile'
 import produce from 'immer'
 import Button from '../button/Button'
+import gameResultInitial from '../../data/game-result-initial'
+import GameResultModel from '../../models/GameResultModel'
+import GameManager from '../../helpers/GameManager'
 
 const Game: React.FC = () => {
     const [tiles19, setTiles19] = useState<TileModel[]>(tilesInitial19)
     const [tiles2, setTiles2] = useState<TileModel[]>(tilesInitial2)
+    const [gameResult, setGameResult] = useState<GameResultModel>(gameResultInitial)
 
     const tiles19selected = useMemo(() => (
         tiles19.filter((tile) => (tile.selected)).length
@@ -40,6 +44,22 @@ const Game: React.FC = () => {
         }))
     }
 
+    const play = (): void => {
+        const arr8 = tiles19
+            .filter((tile) => (tile.selected))
+            .map((tile) => (tile.value))
+
+        const arr1 = tiles2
+            .filter((tile) => (tile.selected))
+            .map((tile) => (tile.value))
+
+        const newGameResult = new GameManager(arr8, arr1).init()
+
+        console.log(newGameResult)
+
+        setGameResult(newGameResult)
+    }
+
     return (
         <div className={styles['wrapper']}>
             <TileGrid title="Поле 1">
@@ -62,7 +82,7 @@ const Game: React.FC = () => {
                     >{tile.value}</Tile>
                 ))}
             </TileGrid>
-            <Button onClick={() => {console.log('submit!')}} disabled={!canSubmit}>
+            <Button onClick={play} disabled={!canSubmit}>
                 Показать результат
             </Button>
         </div>

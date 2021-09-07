@@ -38,12 +38,12 @@ export default class GameManager {
         [
             finalResult ? 'Вы выиграли!' : 'Вы проиграли :(',
             '1 поле:',
-            `Вы загадали: ${this._arr8.sort().join(', ')}`,
-            `Выпали числа: ${this._arr8generated.sort().join(', ')}`,
+            `Вы загадали: ${[...this._arr8].sort().join(', ')}`,
+            `Выпали числа: ${[...this._arr8generated].sort().join(', ')}`,
             `Совпали ${result1}`,
             '2 поле:',
-            `Вы загадали: ${this._arr1.sort().join(', ')}`,
-            `Выпало число: ${this._arr1generated.sort().join(', ')}`,
+            `Вы загадали: ${[...this._arr1].sort().join(', ')}`,
+            `Выпало число: ${[...this._arr1generated].sort().join(', ')}`,
             `Совпало: ${result1}`,
         ].join('\n')
     )
