@@ -1,8 +1,20 @@
 import styles from './TileGrid.module.css'
 
-const TileGrid: React.FC = ({ children }) => (
-    <div className={styles['grid']}>
-        {children}
+interface TileGridProps {
+    title: string
+}
+
+const TileGrid: React.FC<TileGridProps> = ({
+    children,
+    title
+}) => (
+    <div className={styles['container']}>
+        <div className={styles['header']}>
+            <p className={styles['title']}>{title}</p>
+        </div>
+        <div className={styles['grid']}>
+            {children}
+        </div>
     </div>
 )
 

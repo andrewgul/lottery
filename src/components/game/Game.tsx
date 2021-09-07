@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import tilesInitial19 from '../../data/tiles-initial-19'
 import tilesInitial2 from '../../data/tiles-initial-2'
 import TileModel from '../../models/TileModel'
@@ -11,21 +11,35 @@ const Game: React.FC = () => {
     const [tiles19, setTiles19] = useState<TileModel[]>(tilesInitial19)
     const [tiles2, setTiles2] = useState<TileModel[]>(tilesInitial2)
 
+    const tiles19selected = useMemo(() => (
+        tiles19.filter((tile) => (tile.selected)).length
+    ), [tiles19])
+
+    const tiles2selected = useMemo(() => (
+        tiles2.filter((tile) => (tile.selected)).length
+    ), [tiles2])
+
     const handleTile19Selection = (selected: boolean, index: number): void => {
+        if (tiles19selected >= 8) return
+
         setTiles19(produce(tiles19, (draft: TileModel[]) => {
             draft[index].selected = selected
         }))
     }
 
     const handleTile2Selection = (selected: boolean, index: number): void => {
-        setTiles2(produce(tiles19, (draft: TileModel[]) => {
+        if (tiles2selected >= 1) return
+
+        setTiles2(produce(tiles2, (draft: TileModel[]) => {
             draft[index].selected = selected
         }))
     }
 
     return (
         <div className={styles['wrapper']}>
-            <TileGrid>
+            <TileGrid
+                title="Поле 1"
+            >
                 {tiles19.map((tile, index) => (
                     <Tile
                         key={tile.value}
@@ -35,7 +49,9 @@ const Game: React.FC = () => {
                     >{tile.value}</Tile>
                 ))}
             </TileGrid>
-            <TileGrid>
+            <TileGrid
+                title="Поле 2"
+            >
                 {tiles2.map((tile, index) => (
                     <Tile
                         key={tile.value}
