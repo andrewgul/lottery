@@ -1,6 +1,7 @@
 import produce from 'immer'
 
 export default class NumberGenerator {
+    
     static generateInRange = (min: number, max: number): number => {
         if (min > max) {
             throw new Error('min has to be bigger than max')

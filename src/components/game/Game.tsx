@@ -42,9 +42,7 @@ const Game: React.FC = () => {
 
     return (
         <div className={styles['wrapper']}>
-            <TileGrid
-                title="Поле 1"
-            >
+            <TileGrid title="Поле 1">
                 {tiles19.map((tile, index) => (
                     <Tile
                         key={tile.value}
@@ -54,9 +52,7 @@ const Game: React.FC = () => {
                     >{tile.value}</Tile>
                 ))}
             </TileGrid>
-            <TileGrid
-                title="Поле 2"
-            >
+            <TileGrid title="Поле 2">
                 {tiles2.map((tile, index) => (
                     <Tile
                         key={tile.value}
