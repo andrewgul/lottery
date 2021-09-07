@@ -4,7 +4,7 @@ import styles from './Tile.module.css'
 interface TileProps {
     index: number
     tile: TileModel
-    onSelect: (value: number, index: number) => void
+    onSelect: (selected: boolean, index: number) => void
 }
 
 const Tile: React.FC<TileProps> = ({
@@ -15,7 +15,7 @@ const Tile: React.FC<TileProps> = ({
     const { value, selected } = tile
 
     const handleClick = (): void => {
-        onSelect(value, index)
+        onSelect(!selected, index)
     }
 
     return (

@@ -2,6 +2,17 @@
 .tile-selected {
     display: grid;
     place-content: center;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.tile-default {
+    background-color: #FFF;
+    border: 1px solid #DDD;
+}
+
+.tile-selected {
+    background-color: #FFD205;
 }
 
 .value {

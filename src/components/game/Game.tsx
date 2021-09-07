@@ -5,13 +5,22 @@ import TileModel from '../../models/TileModel'
 import styles from './Game.module.css'
 import TileGrid from '../tile-grid/TileGrid'
 import Tile from '../tile/Tile'
+import produce from 'immer'
 
 const Game: React.FC = () => {
     const [tiles19, setTiles19] = useState<TileModel[]>(tilesInitial19)
     const [tiles2, setTiles2] = useState<TileModel[]>(tilesInitial2)
 
-    const handleTileSelection = (value: number, index: number): void => {
-        console.log(`selected tile ${value}`)
+    const handleTile19Selection = (selected: boolean, index: number): void => {
+        setTiles19(produce(tiles19, (draft: TileModel[]) => {
+            draft[index].selected = selected
+        }))
+    }
+
+    const handleTile2Selection = (selected: boolean, index: number): void => {
+        setTiles2(produce(tiles19, (draft: TileModel[]) => {
+            draft[index].selected = selected
+        }))
     }
 
     return (
@@ -22,7 +31,7 @@ const Game: React.FC = () => {
                         key={tile.value}
                         index={index}
                         tile={tile}
-                        onSelect={handleTileSelection}
+                        onSelect={handleTile19Selection}
                     >{tile.value}</Tile>
                 ))}
             </TileGrid>
@@ -32,7 +41,7 @@ const Game: React.FC = () => {
                         key={tile.value}
                         index={index}
                         tile={tile}
-                        onSelect={handleTileSelection}
+                        onSelect={handleTile2Selection}
                     >{tile.value}</Tile>
                 ))}
             </TileGrid>
