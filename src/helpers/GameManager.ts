@@ -11,8 +11,8 @@ export default class GameManager {
     constructor(arr8: number[], arr1: number[]) {
         this._arr8 = arr8
         this._arr1 = arr1
-        this._arr1generated = NumberGenerator.generateArray(8, 1, 19)
-        this._arr8generated = NumberGenerator.generateArray(1, 1, 2)
+        this._arr8generated = NumberGenerator.generateArray(8, 1, 19)
+        this._arr1generated = NumberGenerator.generateArray(1, 1, 2)
     }
 
     public init = (): GameResultModel => {
@@ -44,7 +44,7 @@ export default class GameManager {
             '2 поле:',
             `Вы загадали: ${[...this._arr1].sort().join(', ')}`,
             `Выпало число: ${[...this._arr1generated].sort().join(', ')}`,
-            `Совпало: ${result1}`,
+            `Совпало: ${result2}`,
         ].join('\n')
     )
 }
