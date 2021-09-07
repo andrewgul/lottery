@@ -10,6 +10,7 @@ import Button from '../button/Button'
 import gameResultInitial from '../../data/game-result-initial'
 import GameResultModel from '../../models/GameResultModel'
 import GameManager from '../../helpers/GameManager'
+import Result from '../result/Result'
 
 const Game: React.FC = () => {
     const [tiles19, setTiles19] = useState<TileModel[]>(tilesInitial19)
@@ -60,6 +61,12 @@ const Game: React.FC = () => {
         setGameResult(newGameResult)
     }
 
+    const resetGame = (): void => {
+        setTiles19(tilesInitial19)
+        setTiles2(tilesInitial2)
+        setGameResult(gameResultInitial)
+    }
+
     return (
         <div className={styles['wrapper']}>
             <TileGrid title="Поле 1">
@@ -85,6 +92,12 @@ const Game: React.FC = () => {
             <Button onClick={play} disabled={!canSubmit}>
                 Показать результат
             </Button>
+            {gameResult.finished && (
+                <Result
+                    result={gameResult}
+                    onReset={resetGame}
+                />
+            )}
         </div>
     )
 }
