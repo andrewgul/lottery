@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { Fragment, useState, useMemo } from 'react'
 import tilesInitial19 from '../../data/tiles-initial-19'
 import tilesInitial2 from '../../data/tiles-initial-2'
 import TileModel from '../../models/TileModel'
@@ -55,9 +55,6 @@ const Game: React.FC = () => {
             .map((tile) => (tile.value))
 
         const newGameResult = new GameManager(arr8, arr1).init()
-
-        console.log(newGameResult)
-
         setGameResult(newGameResult)
     }
 
@@ -69,35 +66,40 @@ const Game: React.FC = () => {
 
     return (
         <div className={styles['wrapper']}>
-            <TileGrid title="Поле 1">
-                {tiles19.map((tile, index) => (
-                    <Tile
-                        key={tile.value}
-                        index={index}
-                        tile={tile}
-                        onSelect={handleTile19Selection}
-                    >{tile.value}</Tile>
-                ))}
-            </TileGrid>
-            <TileGrid title="Поле 2">
-                {tiles2.map((tile, index) => (
-                    <Tile
-                        key={tile.value}
-                        index={index}
-                        tile={tile}
-                        onSelect={handleTile2Selection}
-                    >{tile.value}</Tile>
-                ))}
-            </TileGrid>
-            <Button onClick={play} disabled={!canSubmit}>
-                Показать результат
-            </Button>
-            {gameResult.finished && (
-                <Result
-                    result={gameResult}
-                    onReset={resetGame}
-                />
-            )}
+            <div className={styles['container']}>
+                {!gameResult.finished ? (
+                    <Fragment>
+                        <TileGrid title="Поле 1">
+                            {tiles19.map((tile, index) => (
+                                <Tile
+                                    key={tile.value}
+                                    index={index}
+                                    tile={tile}
+                                    onSelect={handleTile19Selection}
+                                >{tile.value}</Tile>
+                            ))}
+                        </TileGrid>
+                        <TileGrid title="Поле 2">
+                            {tiles2.map((tile, index) => (
+                                <Tile
+                                    key={tile.value}
+                                    index={index}
+                                    tile={tile}
+                                    onSelect={handleTile2Selection}
+                                >{tile.value}</Tile>
+                            ))}
+                        </TileGrid>
+                        <Button onClick={play} disabled={!canSubmit}>
+                            Показать результат
+                        </Button>
+                    </Fragment>
+                ) : (
+                    <Result
+                        result={gameResult}
+                        onReset={resetGame}
+                    />
+                )}
+            </div>
         </div>
     )
 }
