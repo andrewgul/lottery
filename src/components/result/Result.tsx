@@ -16,9 +16,11 @@ const Result: React.FC<ResultProps> = ({
     return (
         <div className={styles['container']}>
             <p className={styles['message']}>{message}</p>
-            <Button onClick={onReset}>
-                Сыграть заново
-            </Button>
+            <div className={styles['button-wrapper']}>
+                <Button onClick={onReset}>
+                    Сыграть заново
+                </Button>
+            </div>
         </div>
     )
 }

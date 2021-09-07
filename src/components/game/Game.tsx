@@ -67,6 +67,9 @@ const Game: React.FC = () => {
     return (
         <div className={styles['wrapper']}>
             <div className={styles['container']}>
+                <div className={styles['title']}>
+                    Билет
+                </div>
                 {!gameResult.finished ? (
                     <Fragment>
                         <TileGrid title="Поле 1">
@@ -89,9 +92,11 @@ const Game: React.FC = () => {
                                 >{tile.value}</Tile>
                             ))}
                         </TileGrid>
-                        <Button onClick={play} disabled={!canSubmit}>
-                            Показать результат
-                        </Button>
+                        <div className={styles['button-wrapper']}>
+                            <Button onClick={play} disabled={!canSubmit}>
+                                Показать результат
+                            </Button>
+                        </div>
                     </Fragment>
                 ) : (
                     <Result
